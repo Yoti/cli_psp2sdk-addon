@@ -1,5 +1,5 @@
-rem psp2psarc_extract by Yoti
 @echo off
+rem psp2psarc_extract v1.1 by Yoti
 if "%1"=="" (
 	echo Error: no PSARC
 	goto thisistheend
