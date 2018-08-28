@@ -48,7 +48,8 @@ begin
     Str:='';
     Str:=Str + Chr($09) + Chr($09);
     Str:=Str + '<file path="' + ChangeFileExt(ParamStr(1), '') + '/';
-    Str:=Str + StringReplace(List[i], ' ' + ExtractSubString(List[i], '(', ')'), '', [rfIgnoreCase, rfReplaceAll]);
+    Str:=Str + StringReplace(List[i], ' ' +
+      ExtractSubString(List[i], '(', ')'), '', [rfIgnoreCase, rfReplaceAll]);
     Str:=Str + '"';
     if (Pos('100%', List.Strings[i]) <> 0)
     then Str:=Str + ' compressed="false"';
@@ -77,7 +78,7 @@ begin
   Result:=Ret;
 end;
 
-begin // psp2psarc_xml by Yoti
+begin // psp2psarc_xml v1.1 by Yoti
   try
     if (ParamCount < 1) then begin
       WriteLn('Error: no input file (-1)');
@@ -140,7 +141,12 @@ begin // psp2psarc_xml by Yoti
             then Xml.Append(Chr($09) + Chr($09) + '<compression type="lzma" enabled="false" />')
             else Xml.Append(Chr($09) + Chr($09) + '<compression type="lzma" enabled="true" />');
         end;
-        Xml.Append(Chr($09) + Chr($09) + '<strip regex="' + ChangeFileExt(ParamStr(1), '') + '/" />');
+        Str:='';
+        Str:=Chr($09) + Chr($09) + '<strip regex="';
+        if (ExtractFileName(ParamStr(1)) = ParamStr(1))
+        then Str:=Str + StringReplace(ExtractFilePath(ParamStr(0)), '\', '/', [rfIgnoreCase, rfReplaceAll]);
+        Str:=Str + ChangeFileExt(ParamStr(1), '') + '/" />';
+        Xml.Append(Str);
         Xml.Append('');
         AddFilesFromList(ChangeFileExt(ParamStr(1), '_list.txt'), Xml);
         Xml.Append(Chr($09) + '</create>');
