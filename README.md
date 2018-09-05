@@ -12,3 +12,9 @@ Some small tools for PS Vita development
   * dependencies: psp2psarc.exe
 * (del /q file_list.txt)
 * (del /q file_new.xml)
+
+# elf_tools
+* self2elf (unpack)
+  * dependencies: [vita-unmake-fself.exe](https://github.com/CelesteBlue-dev/PSVita-RE-tools/raw/master/vita-unmake-fself/release/vita-unmake-fself.exe)
+* elf2self (repack)
+  * dependencies: [vita-elf-inject.exe](https://github.com/CelesteBlue-dev/PSVita-RE-tools/raw/master/elf_injector/build/vita-elf-inject.exe)
